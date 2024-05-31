@@ -2,7 +2,7 @@
 //  AuthService.swift
 //  SignInWithApple-Google
 //
-//  Created by darktech4 on 31/05/2024.
+//  Created by xqsadness on 31/05/2024.
 //
 
 import SwiftUI

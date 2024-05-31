@@ -77,6 +77,7 @@ class LoginViewModel: ObservableObject {
     }
     
     // MARK: Apple sign in
+    @MainActor 
     func appleAuthenticate(_ credential: ASAuthorizationAppleIDCredential){
         isLoading = true
         AuthService.shared.appleAuthenticate(credential, nonce: nonce) { [self] in
