@@ -2,11 +2,12 @@
 //  HomeView.swift
 //  SignInWithApple-Google
 //
-//  Created by darktech4 on 30/05/2024.
+//  Created by xqsadness on 30/05/2024.
 //
 
 import SwiftUI
 import Firebase
+import GoogleSignIn
 
 struct HomeView: View {
     
@@ -16,7 +17,10 @@ struct HomeView: View {
         NavigationStack{
             Button{
                 try? Auth.auth().signOut()
-                logStatus = false
+                GIDSignIn.sharedInstance.signOut()
+                withAnimation(.easeInOut){
+                    logStatus = false
+                }
             }label: {
                 Text("Logout")
                 

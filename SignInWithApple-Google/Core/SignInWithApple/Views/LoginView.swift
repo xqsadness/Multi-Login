@@ -2,7 +2,7 @@
 //  LoginView.swift
 //  SignInWithApple-Google
 //
-//  Created by darktech4 on 30/05/2024.
+//  Created by xqsadness on 30/05/2024.
 //
 
 import SwiftUI
@@ -11,7 +11,7 @@ import AuthenticationServices
 import CryptoKit
 
 struct LoginView: View {
-    
+    @Environment(\.dismiss) private var dismiss
     //View props
     @State private var errorMessage: String = ""
     @State private var showAlert: Bool = false
@@ -90,7 +90,7 @@ struct LoginView: View {
                 .padding(.top, 10)
                 
                 Button{
-                    
+                    dismiss()
                 }label: {
                     Text("Other Sign in Options")
                         .foregroundStyle(Color.primary)

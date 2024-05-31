@@ -2,7 +2,7 @@
 //  SignInWithApple.swift
 //  SignInWithApple-Google
 //
-//  Created by darktech4 on 30/05/2024.
+//  Created by xqsadness on 30/05/2024.
 //
 
 import SwiftUI
