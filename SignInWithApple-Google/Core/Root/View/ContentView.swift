@@ -11,19 +11,14 @@ import GoogleSignIn
 
 struct ContentView: View {
     
-    @AppStorage("log_status") private var logStatus: Bool = false
+    @StateObject private var viewModel = ContentViewModel()
     
     var body: some View {
         VStack{
-            if logStatus{
+            if viewModel.userSession != nil{
                 HomeView()
             }else{
-                NavigationStack{
-                    List{
-                        NavigationLink("Apple sign in"){ SignInWithApple().navigationBarBackButtonHidden(true) }
-                        NavigationLink("Multi Login"){ MultiLoginView().navigationBarBackButtonHidden(true) }
-                    }
-                }
+                MultiLoginView()
             }
         }
         .onOpenURL { url in

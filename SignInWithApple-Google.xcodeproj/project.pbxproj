@@ -7,13 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DD1410892C0982C2006497E9 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1410872C0982C2006497E9 /* HomeView.swift */; };
-		DD14108A2C0982C2006497E9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1410882C0982C2006497E9 /* ContentView.swift */; };
 		DD14108C2C0982DD006497E9 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = DD14108B2C0982DD006497E9 /* GoogleSignIn */; };
 		DD14108E2C0982DD006497E9 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = DD14108D2C0982DD006497E9 /* GoogleSignInSwift */; };
 		DD1410962C098321006497E9 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1410922C098321006497E9 /* LoginViewModel.swift */; };
 		DD1410972C098321006497E9 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1410942C098321006497E9 /* CustomTextField.swift */; };
 		DD1410982C098321006497E9 /* MultiLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1410952C098321006497E9 /* MultiLoginView.swift */; };
+		DD14109B2C0988E9006497E9 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD14109A2C0988E9006497E9 /* AuthService.swift */; };
+		DD1410A92C09AEBD006497E9 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1410A52C09AEBD006497E9 /* ContentViewModel.swift */; };
+		DD1410AA2C09AEBD006497E9 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1410A72C09AEBD006497E9 /* HomeView.swift */; };
+		DD1410AB2C09AEBD006497E9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1410A82C09AEBD006497E9 /* ContentView.swift */; };
 		DD5A4C352C085F83005AC98A /* SignInWithApple_GoogleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5A4C342C085F83005AC98A /* SignInWithApple_GoogleApp.swift */; };
 		DD5A4C3B2C085F85005AC98A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD5A4C3A2C085F85005AC98A /* Assets.xcassets */; };
 		DD5A4C3E2C085F85005AC98A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD5A4C3D2C085F85005AC98A /* Preview Assets.xcassets */; };
@@ -53,12 +55,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		DD1410872C0982C2006497E9 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		DD1410882C0982C2006497E9 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		DD14108F2C0982F6006497E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		DD1410922C098321006497E9 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		DD1410942C098321006497E9 /* CustomTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		DD1410952C098321006497E9 /* MultiLoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiLoginView.swift; sourceTree = "<group>"; };
+		DD14109A2C0988E9006497E9 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		DD1410A52C09AEBD006497E9 /* ContentViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
+		DD1410A72C09AEBD006497E9 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		DD1410A82C09AEBD006497E9 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		DD5A4C312C085F83005AC98A /* SignInWithApple-Google.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SignInWithApple-Google.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD5A4C342C085F83005AC98A /* SignInWithApple_GoogleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithApple_GoogleApp.swift; sourceTree = "<group>"; };
 		DD5A4C3A2C085F85005AC98A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -112,15 +116,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		DD1410862C0982C2006497E9 /* Root */ = {
-			isa = PBXGroup;
-			children = (
-				DD1410872C0982C2006497E9 /* HomeView.swift */,
-				DD1410882C0982C2006497E9 /* ContentView.swift */,
-			);
-			path = Root;
-			sourceTree = "<group>";
-		};
 		DD1410902C098321006497E9 /* MultiLogin */ = {
 			isa = PBXGroup;
 			children = (
@@ -141,10 +136,44 @@
 		DD1410932C098321006497E9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				DD1410942C098321006497E9 /* CustomTextField.swift */,
 				DD1410952C098321006497E9 /* MultiLoginView.swift */,
+				DD1410942C098321006497E9 /* CustomTextField.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		DD1410992C0988DB006497E9 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				DD14109A2C0988E9006497E9 /* AuthService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		DD1410A32C09AEBD006497E9 /* Root */ = {
+			isa = PBXGroup;
+			children = (
+				DD1410A42C09AEBD006497E9 /* ViewModel */,
+				DD1410A62C09AEBD006497E9 /* View */,
+			);
+			path = Root;
+			sourceTree = "<group>";
+		};
+		DD1410A42C09AEBD006497E9 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				DD1410A52C09AEBD006497E9 /* ContentViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		DD1410A62C09AEBD006497E9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DD1410A72C09AEBD006497E9 /* HomeView.swift */,
+				DD1410A82C09AEBD006497E9 /* ContentView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		DD5A4C282C085F83005AC98A = {
@@ -172,6 +201,7 @@
 				DD5A4C3A2C085F85005AC98A /* Assets.xcassets */,
 				DD5A4C842C086440005AC98A /* App */,
 				DD5A4C832C086432005AC98A /* Core */,
+				DD1410992C0988DB006497E9 /* Service */,
 				DD5A4C3C2C085F85005AC98A /* Preview Content */,
 			);
 			path = "SignInWithApple-Google";
@@ -196,7 +226,7 @@
 		DD5A4C832C086432005AC98A /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				DD1410862C0982C2006497E9 /* Root */,
+				DD1410A32C09AEBD006497E9 /* Root */,
 				DD1410902C098321006497E9 /* MultiLogin */,
 				DD5A4C442C085FD6005AC98A /* SignInWithApple */,
 			);
@@ -329,11 +359,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD1410AA2C09AEBD006497E9 /* HomeView.swift in Sources */,
+				DD1410A92C09AEBD006497E9 /* ContentViewModel.swift in Sources */,
 				DD1410972C098321006497E9 /* CustomTextField.swift in Sources */,
 				DD5A4C462C08600D005AC98A /* SignInWithApple.swift in Sources */,
-				DD14108A2C0982C2006497E9 /* ContentView.swift in Sources */,
+				DD14109B2C0988E9006497E9 /* AuthService.swift in Sources */,
 				DD1410962C098321006497E9 /* LoginViewModel.swift in Sources */,
-				DD1410892C0982C2006497E9 /* HomeView.swift in Sources */,
+				DD1410AB2C09AEBD006497E9 /* ContentView.swift in Sources */,
 				DD5A4C8A2C0865DB005AC98A /* LoginView.swift in Sources */,
 				DD1410982C098321006497E9 /* MultiLoginView.swift in Sources */,
 				DD5A4C352C085F83005AC98A /* SignInWithApple_GoogleApp.swift in Sources */,
@@ -485,7 +517,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.iamblue.SignInWithAppleGoogle;
+				PRODUCT_BUNDLE_IDENTIFIER = com.iamblue.MultiLogin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -516,7 +548,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.iamblue.SignInWithAppleGoogle;
+				PRODUCT_BUNDLE_IDENTIFIER = com.iamblue.MultiLogin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

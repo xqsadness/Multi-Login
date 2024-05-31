@@ -14,7 +14,6 @@ import Firebase
 struct MultiLoginView: View {
     
     @StateObject private var vm = LoginViewModel()
-    @Environment(\.dismiss) private var dismiss
     
     var body: some View {
         ScrollView(.vertical){
@@ -34,9 +33,6 @@ struct MultiLoginView: View {
                 .lineSpacing(10)
                 .padding(.top, 20)
                 .padding(.trailing, 15)
-                .onTapGesture {
-                    dismiss()
-                }
                 
                 //Custom textField
                 CustomTextField(hint: "+84 123456789", text: $vm.mobileNo)
@@ -147,6 +143,11 @@ struct MultiLoginView: View {
         }
         .scrollIndicators(.hidden)
         .alert(vm.errorMessage, isPresented: $vm.showError) {}
+        .overlay {
+            if vm.isLoading{
+                LoadingScreen()
+            }
+        }
     }
     
     @ViewBuilder
@@ -167,6 +168,19 @@ struct MultiLoginView: View {
         .background{
             RoundedRectangle(cornerRadius: 10, style: .continuous)
                 .fill(.black)
+        }
+    }
+    
+    //Loading screen
+    @ViewBuilder
+    func LoadingScreen() -> some View{
+        ZStack{
+            Rectangle()
+                .fill(.ultraThinMaterial)
+            
+            ProgressView()
+                .frame(width: 45, height: 45)
+                .background(.background, in: .rect(cornerRadius: 5))
         }
     }
 }

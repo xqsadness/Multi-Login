@@ -8,40 +8,38 @@
 import SwiftUI
 import Firebase
 import AuthenticationServices
-import CryptoKit
 import GoogleSignIn
 
 class LoginViewModel: ObservableObject {
     
-    //View props
+    // MARK: View props
     @Published var mobileNo: String = ""
     @Published var otpCode: String = ""
+    @Published var isLoading: Bool = false
     
     @Published var CLIENT_CODE: String = ""
     @Published var showOTPField: Bool = false
     
-    //Error props
+    // MARK: Error props
     @Published var showError:Bool = false
     @Published var errorMessage: String = ""
     
-    //Apple log status
-    @AppStorage("log_status") private var logStatus: Bool = false
-    
-    //Apple sign in prop
+    // MARK: Apple sign in prop
     @Published var nonce: String = ""
     
-    //Firebase api's
+    // MARK: Firebase api's
+    @MainActor
     func getOTPCode(){
         UIApplication.shared.closeKeyboard()
         Task{
             do{
-                //Mark: Disbale it when testing with real device
+                // MARK: Disbale it when testing with real device
                 Auth.auth().settings?.isAppVerificationDisabledForTesting = true
                 
                 let code = try await PhoneAuthProvider.provider().verifyPhoneNumber("+\(mobileNo)", uiDelegate: nil)
                 await MainActor.run {
                     CLIENT_CODE = code
-                    //Mark enabling otp field when it success
+                    // MARK: enabling otp field when it success
                     withAnimation(.easeInOut){ showOTPField = true }
                 }
                 
@@ -51,19 +49,16 @@ class LoginViewModel: ObservableObject {
         }
     }
     
+    // MARK: Phone otp sign in
     func verifyOTPCode(){
+        isLoading = true
         UIApplication.shared.closeKeyboard()
         Task{
             do{
-                let credential = PhoneAuthProvider.provider().credential(withVerificationID: CLIENT_CODE, verificationCode: otpCode)
-                
-                try await Auth.auth().signIn(with: credential)
-                
-                //Mark: user logged in succesfully
-                print("Success !")
+                try await AuthService.shared.verifyCode(CLIENT_CODE: CLIENT_CODE, otpCode: otpCode)
                 await MainActor.run {
                     withAnimation(.easeInOut){
-                        logStatus = true
+                        isLoading = false
                     }
                 }
             }catch{
@@ -72,54 +67,34 @@ class LoginViewModel: ObservableObject {
         }
     }
     
-    //handling Error
+    // MARK: handling Error
     func handleError(error: Error) async{
         await MainActor.run {
             errorMessage = error.localizedDescription
             showError.toggle()
+            isLoading = false
         }
     }
     
-    //Apple sign in
+    // MARK: Apple sign in
     func appleAuthenticate(_ credential: ASAuthorizationAppleIDCredential){
-        guard let appleIDToken = credential.identityToken else {
-            print("Cannot process your request.")
-            return
-        }
-        guard let idTokenString = String(data: appleIDToken, encoding: .utf8) else {
-            print("Cannot process your request.")
-            return
-        }
-        // Initialize a Firebase credential, including the user's full name.
-        let credential = OAuthProvider.appleCredential(withIDToken: idTokenString,
-                                                       rawNonce: nonce,
-                                                       fullName: credential.fullName)
-        Auth.auth().signIn(with: credential) { [self] (authResult, error) in
-            if let error {
-                print(error.localizedDescription)
-            }
-            // User is signed in to Firebase with Apple.
-            dump(authResult)
+        isLoading = true
+        AuthService.shared.appleAuthenticate(credential, nonce: nonce) { [self] in
             withAnimation(.easeInOut){
-                logStatus = true
+                isLoading = false
             }
         }
     }
     
-    //Mark: Logging google user info firebase
+    // MARK: Logging google user info firebase
     func logGoogleUser(user: GIDGoogleUser){
         Task{
             do{
-                guard let idToken = user.idToken?.tokenString else { return }
-                let accesToken = user.accessToken.tokenString
-                
-                let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: accesToken)
-                
-                try await Auth.auth().signIn(with: credential)
-                print("Success google")
+                isLoading = true
+                try await AuthService.shared.logGoogleUser(user: user)
                 await MainActor.run {
                     withAnimation(.easeInOut){
-                        logStatus = true
+                        isLoading = false
                     }
                 }
             }catch{
@@ -141,36 +116,4 @@ extension UIApplication{
         
         return viewController
     }
-}
-
-//Apple sign in helper
-func randomNonceString(length: Int = 32) -> String {
-    precondition(length > 0)
-    var randomBytes = [UInt8](repeating: 0, count: length)
-    let errorCode = SecRandomCopyBytes(kSecRandomDefault, randomBytes.count, &randomBytes)
-    if errorCode != errSecSuccess {
-        fatalError(
-            "Unable to generate nonce. SecRandomCopyBytes failed with OSStatus \(errorCode)"
-        )
-    }
-    
-    let charset: [Character] =
-    Array("0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._")
-    
-    let nonce = randomBytes.map { byte in
-        // Pick a random character from the set, wrapping around if needed.
-        charset[Int(byte) % charset.count]
-    }
-    
-    return String(nonce)
-}
-
-func sha256(_ input: String) -> String {
-    let inputData = Data(input.utf8)
-    let hashedData = SHA256.hash(data: inputData)
-    let hashString = hashedData.compactMap {
-        String(format: "%02x", $0)
-    }.joined()
-    
-    return hashString
 }
