@@ -3,6 +3,12 @@
 
 <h2>Preview</h2>
 
+For testing the phone authentication feature, you can use the following test credentials:
+
+- **Phone Number:** `+84123456789`
+- **OTP Code:** `123123`
+
+These credentials are set up for testing purposes in Firebase Authentication and can be used to simulate the login process during development.
 <p>
     <img src="https://github.com/xqsadness/Multi-Login/assets/81242756/59c9ff3f-6174-4066-aa56-91197c6e942f" alt="IMG_0272" width="200"/>
     <img src="https://github.com/xqsadness/Multi-Login/assets/81242756/95725fb0-249d-4dd1-87ab-f9314f24c7e3" alt="IMG_0273" width="200"/>
